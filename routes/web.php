@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('landing.coming_soon');
 });
+
+Route::get('/coming_soon', 'LandingController@comingSoon')->name('landing.coming_soon');
