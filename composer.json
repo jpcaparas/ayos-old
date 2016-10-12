@@ -39,6 +39,8 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "mkdir -p bootstrap/cache",
+            "chmod -R 777 bootstrap/cache",
             "php artisan optimize"
         ],
         "post-update-cmd": [
