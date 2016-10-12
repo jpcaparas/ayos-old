@@ -1,0 +1,21 @@
+---
+nginx_worker_processes: 1
+nginx_worker_connections: 1024
+
+ssl_config: false
+
+# SSL certificate configuration example:
+#
+# ssl_certificates:
+#   - cert_src: path/to/cert.pem            # path to certificate file
+#     cert_dest: path/to/cert.pem           # where to put cert on server
+#     key_src: path/to/server.key           # path to server.key encrypted
+#     key_dest: path/to/server.key          # where to put encrypted key on server
+#     key_unprotected: path/to/server.key   # where to put decrypted key on server
+#     key_pssword: "sdoifsodf"              # password to decrypt key
+#
+#   - cert_src: path/to/cert.pem            # path to certificate file
+#     cert_dest: path/to/cert.pem           # where to put cert on server
+#     key_src: path/to/server.key           # path to server.key encrypted
+#     key_dest: path/to/server.key          # where to put encrypted key on server
+#     key_unprotected: path/to/server.key   # where to put decrypted key on server

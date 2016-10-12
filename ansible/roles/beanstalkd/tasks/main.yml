@@ -1,0 +1,16 @@
+---
+- name: install beanstalkd
+  apt: pkg=beanstalkd state=latest
+
+#- name: update beanstalkd init file
+#  template:
+#    dest=/etc/init.d/beanstalkd
+#    src=beanstalkd.j2
+#    owner=root
+#    group=root
+#    mode=0755
+#  tags:
+#    - config
+
+- name: start beanstalkd
+  service: name=beanstalkd state=started

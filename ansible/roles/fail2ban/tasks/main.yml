@@ -1,0 +1,13 @@
+---
+- name: install fail2ban
+  apt: pkg=fail2ban state=latest
+
+- name: configure fail2ban
+  template: backup=yes
+            dest=/etc/fail2ban/jail.local
+            src=fail2ban-jail.conf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart fail2ban

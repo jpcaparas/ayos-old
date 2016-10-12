@@ -1,0 +1,77 @@
+---
+- name: make sure the www folder is writable
+  when: clone
+  file: path=/var/www state=directory mode=0777
+
+- name: Checkout the project
+  sudo: false
+  when: clone
+  git: repo={{ git_repo }}
+       dest={{ app_path }}
+       accept_hostkey=yes
+       version={{ git_branch }}
+       force=yes
+
+- stat: path={{ app_path }}/.env
+  sudo: false
+  register: envfile
+
+- name: copy .env.example to .env
+  sudo: false
+  when: not envfile.stat.exists
+  command: cp {{ app_path }}/.env.example {{ app_path }}/.env
+
+- name: set DB details in .env
+  lineinfile:
+    dest={{ app_path }}/.env
+    regexp=^{{ item.param_name }}=
+    line={{ item.param_name }}={{ item.param_value }}
+  with_items:
+    - param_name: "DB_DATABASE"
+      param_value: "{{ db_name }}"
+    - param_name: "DB_USERNAME"
+      param_value: "{{ db_user }}"
+    - param_name: "DB_PASSWORD"
+      param_value: "{{ db_pass }}"
+
+- stat: path={{ app_path }}/vendor
+  register: vendordir
+
+- name: make sure applicable folders are writable
+  file:
+    path={{ item }}
+    state=directory
+    mode=0777
+    recurse=yes
+  with_items:
+    - "{{ app_path }}/storage"
+    - "{{ app_path }}/public/assets"
+
+- name: composer install
+  sudo: false
+  when: not vendordir.stat.exists
+  composer: command=install working_dir={{ app_path }} no_dev={{ composer_no_dev }}
+  register: composer_install
+
+- name: artisan key:generate
+  sudo: false
+  when: composer_install.changed
+  shell: php {{ app_path }}/artisan key:generate
+
+# - name: run core migrations
+#   # when: composer_install.changed
+#   shell: php {{ app_path }}/artisan migrate --path=vendor/anomaly/streams-platform/migrations/core --no-addons
+
+# - name: run streams migrations
+#   # when: composer_install.changed
+#   shell: php {{ app_path }}/artisan migrate --path=vendor/anomaly/streams-platform/migrations/application --no-addons
+
+# - name: artisan migrate
+#   # when: composer_install.changed
+#   shell: php {{ app_path }}/artisan migrate {{ db_run_seeding }}
+
+# - name: set cms to installed
+#   lineinfile: dest={{ app_path }}/.env regexp="^INSTALLED" line="INSTALLED=true"
+
+# - name: remove the Install Module
+#   file: src={{ app_path }}/core/anomaly/installer-module state=absent

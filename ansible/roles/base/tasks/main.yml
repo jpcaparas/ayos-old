@@ -1,0 +1,37 @@
+---
+- name: apt update
+  sudo: true
+  apt: update_cache=yes cache_valid_time=7200
+
+- name: install base utilities
+  apt: pkg={{item}} state=latest
+  with_items:
+    - git-core
+    - tmux
+    - htop
+    - strace
+    - vim-nox
+    - iotop
+    - tcpdump
+    - curl
+    - python-setuptools
+    - zsh
+    - supervisor
+
+- name: install pip
+  easy_install: name=pip
+
+- name: install httpie
+  pip: name=httpie state=present
+
+- name: check current timezone
+  shell: cat /etc/timezone
+  register: get_timezone
+
+- name: set timezone variables
+  shell: echo "{{ timezone }}" > /etc/timezone
+  when: '"{{ timezone }}" not in get_timezone.stdout'
+  notify: update timezone
+
+- name: regenerate en_NZ.UTF-8 locale
+  shell: locale-gen en_NZ.UTF-8

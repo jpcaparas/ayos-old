@@ -1,0 +1,6 @@
+---
+root_db_password: vagrant
+db_name: vagrant
+db_pass: vagrant
+db_user: vagrant
+db_api_name: vagrant_api

@@ -1,0 +1,17 @@
+[color]
+    ui = true
+    status = auto
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    st = status -sb
+    cl = clone
+    co = checkout
+    # Last tag
+    lt = describe --tags --abbrev=0
+    # Pretty log of last 25 commits
+    lo = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative -25
+[help]
+    autocorrect = 50

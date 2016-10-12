@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: true
+  roles:
+    - dotdeb
+    - base
+    - webserver
+    - php7
+    # - php5
+    # - letsencrypt
+    # - mysqlserver
+    - mariadb-server
+    # - redis-server
+    # - beanstalkd
+    # - elasticsearch
+    # - application

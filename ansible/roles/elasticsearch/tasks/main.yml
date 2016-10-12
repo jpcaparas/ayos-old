@@ -1,0 +1,31 @@
+---
+
+- name: install OpenJDK
+  apt: pkg=openjdk-7-jre state=latest
+
+# - name: Add the Oracle Java PPA
+#   apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present update_cache=yes
+
+# - name: Automatically select the Oracle License
+#   debconf: name=oracle-java8-installer question=shared/accepted-oracle-license-v1-1 value=true vtype=select
+
+# - name: Install Java 8
+#   apt: pkg=oracle-java8-installer force=yes state=installed
+
+- name: Install ES PGP Key
+  apt_key: url=https://packages.elastic.co/GPG-KEY-elasticsearch state=present
+
+- name: Add Elasticsearch APT Repo
+  apt_repository: repo='deb http://packages.elastic.co/elasticsearch/2.x/debian stable main' state=present update_cache=yes
+
+- name: Install Elasticsearch
+  apt: pkg=elasticsearch state=latest update_cache=yes force=yes
+
+- name: Adding ES Scripting
+  lineinfile: "dest=/etc/elasticsearch/elasticsearch.yml line='script.disable_dynamic: false'"
+
+- name: Restarting ElasticSearch
+  service: name=elasticsearch state=restarted
+
+- name: Ensure Elasticsearch starts at startup
+  service: name=elasticsearch enabled=yes

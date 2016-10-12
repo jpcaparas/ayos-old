@@ -1,0 +1,73 @@
+# /etc/nginx/sites-available/base-symfony.conf
+
+# Disable Server Side Includes
+ssi off;
+
+# Static Contents
+location ~* ^.+.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js)$ {
+  expires 30d;
+}
+
+# no gzip for IE6
+gzip_disable "msie6";
+
+# Set the max size for file uploads to 50Mb
+client_max_body_size 50M;
+
+location / {
+  if ($request_method = 'OPTIONS') {
+     #add_header 'Access-Control-Allow-Origin' $http_origin;
+     add_header 'Access-Control-Allow-Origin' '*';
+     #
+     # Om nom nom cookies
+     #
+     add_header 'Access-Control-Allow-Credentials' 'true';
+     add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PATCH, PUT';
+     #
+     # Custom headers and headers various browsers *should* be OK with but aren't
+     #
+     add_header 'Access-Control-Allow-Headers' 'X-API-ACCOUNT-TYPE,X-API-DEVICE,X-API-AUTH,DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+     #
+     # Tell client that this pre-flight info is valid for 20 days
+     #
+     add_header 'Access-Control-Max-Age' 1728000;
+     add_header 'Content-Type' 'text/plain charset=UTF-8';
+     add_header 'Content-Length' 0;
+     return 204;
+   }
+
+   #if ($request_method = 'POST') {
+   #  add_header 'Access-Control-Allow-Origin' $http_origin;
+   #  add_header 'Access-Control-Allow-Credentials' 'true';
+   #  add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+   #  add_header 'Access-Control-Allow-Headers' 'X-API-DEVICE,X-API-AUTH,DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+   #}
+
+   #if ($request_method = 'GET') {
+   #  #add_header 'Access-Control-Allow-Origin' '*';
+   #  add_header 'Access-Control-Allow-Origin' $http_origin;
+   #  add_header 'Access-Control-Allow-Credentials' 'true';
+   #  add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+   #  add_header 'Access-Control-Allow-Headers' 'X-API-DEVICE,X-API-AUTH,DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+   #}
+  index index.php;
+  try_files $uri /index.php?$args;
+}
+
+# Only allow these request methods, Do not accept DELETE, SEARCH and other methods
+# if ($request_method !~ ^(GET|HEAD|POST|OPTIONS)$ ) {
+#     return 444;
+# }
+
+# Custom error page for 403
+error_page 403 /403.html;
+    location = /403.html {
+    root  /var/www/etc/nginx/errors/;
+    allow all;
+}
+
+error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+    root  /var/www/etc/nginx/errors/;
+    allow all;
+}

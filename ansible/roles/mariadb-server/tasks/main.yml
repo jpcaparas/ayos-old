@@ -1,0 +1,42 @@
+---
+- name: install pgp key
+  apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db state=present
+
+- name: add mariadb repo
+  apt_repository: repo='deb http://mariadb.mirror.digitalpacific.com.au/repo/10.1/debian jessie main' state=present update_cache=yes
+
+- name: install mariadb
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - mariadb-client
+    - mariadb-server
+    - python-mysqldb
+
+- name: copy my.cnf
+  template: backup=no
+            dest=/etc/mysql/my.cnf
+            src=my.cnf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart mysql
+
+- name: set root password
+  mysql_user: name=root host=localhost password={{ root_db_password }}
+
+- name: copy my.cnf with root credentials
+  template:
+    src=user.my.cnf
+    dest=/root/.my.cnf
+    owner=root
+    mode=0600
+
+- name: create db user
+  mysql_user: name={{ db_user }} password={{ db_pass }} priv=*.*:ALL state=present
+
+- name: creating {{ db_name }} db
+  mysql_db: name={{ db_name }} state=present
+
+- name: modify configuration file to listen on all interfaces
+  lineinfile: dest=/etc/mysql/my.cnf regexp="^bind-address" line="bind-address=0.0.0.0"

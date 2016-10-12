@@ -1,0 +1,56 @@
+---
+- include: provision.yml
+- hosts: ayos
+  roles:
+    - role: fail2ban
+      become: yes
+      become_method: sudo
+      tags:
+        - fail2ban
+  vars:
+    nginx_worker_processes: 1
+    nginx_worker_connections: 1024
+    phpfpm_www_listen: /var/run/php/php7.0-fpm.sock
+  tasks:
+    - name: copy gitconfig file
+      copy:
+         src=templates/gitconfig
+         dest=~/.gitconfig
+         owner={{ ansible_ssh_user }}
+         group={{ ansible_ssh_user }}
+         mode=0644
+
+    - name: copy bash_aliases file
+      copy:
+         src=templates/bash_aliases
+         dest=~/.bash_aliases
+         owner={{ ansible_ssh_user }}
+         group={{ ansible_ssh_user }}
+         mode=0644
+
+    - name: switch to /var/www after login
+      lineinfile:
+        dest=/home/{{ ansible_ssh_user }}/.bashrc
+        line="cd /var/www"
+        regexp="^cd \/var/www"
+        state=present
+        insertafter=EOF
+        create=True
+
+    - name: setup virtual hosts
+      sudo: yes
+      template:
+        dest=/etc/nginx/conf.d/{{ item.server_name }}.conf
+        src=templates/nginx-vhost.j2
+        owner=root
+        group=root
+        mode=644
+      with_items:
+        - server_name: ayos.co.nz
+          root_dir: /var/www/ayos.co.nz/current/public
+        - server_name: uat.ayos.co.nz
+          root_dir: /var/www/uat.ayos.co.nz/public
+
+    - name: reload nginx
+      sudo: yes
+      service: name=nginx state=reloaded

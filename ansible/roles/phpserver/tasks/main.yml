@@ -1,0 +1,47 @@
+---
+- name: install php7.0-fpm
+  apt: pkg=php7.0-fpm state=latest
+
+- name: copy php7.0-fpm php.ini
+  template: backup=no
+            dest=/etc/php/7.0/fpm/php.ini
+            src=php-fpm.ini
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php-fpm
+
+- name: copy php7.0-fpm config
+  template: backup=no
+            dest=/etc/php/7.0/fpm/php-fpm.conf
+            src=php-fpm.conf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php-fpm
+
+- name: copy php7.0-fpm www.conf
+  template: backup=no
+            dest=/etc/php/7.0/fpm/pool.d/www.conf
+            src=php-fpm-www.conf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php-fpm
+
+- stat: path=/etc/nginx
+  register: nginx_path
+
+- name: copy php-fastcgi.conf to /etc/nginx
+  template: backup=no
+      dest=/etc/nginx/php-fastcgi.conf
+            src=php-fastcgi.conf.j2
+            owner=root
+            group=root
+            mode=0644
+  when: nginx_path.stat.exists
+  notify:
+    - restart nginx

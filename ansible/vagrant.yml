@@ -1,0 +1,51 @@
+---
+- include: provision.yml
+- hosts: all
+  roles:
+    # - role: application
+    #   tags:
+    #     - application
+  vars:
+    phpfpm_www_listen: /var/run/php/php7.0-fpm.sock
+  tasks:
+    - name: copy gitconfig file
+      copy:
+         src=templates/gitconfig
+         dest=~/.gitconfig
+         owner=vagrant
+         group=vagrant
+         mode=0644
+
+    - name: copy bash_aliases file
+      copy:
+         src=templates/bash_aliases
+         dest=~/.bash_aliases
+         owner=vagrant
+         group=vagrant
+         mode=0644
+
+    - name: switch to /vagrant after login
+      lineinfile:
+         dest=/home/vagrant/.bashrc
+         line="cd /vagrant"
+         regexp="^cd \/vagrant"
+         owner=vagrant
+         state=present
+         insertafter=EOF
+         create=True
+
+    - name: setup virtualHosts
+      sudo: yes
+      template:
+        dest=/etc/nginx/conf.d/{{ item.server_name }}.conf
+        src=templates/nginx-vhost.j2
+        owner=root
+        group=root
+        mode=644
+      with_items:
+        - server_name: "{{ hostname }}"
+          root_dir: /vagrant/public
+
+    - name: reload nginx
+      sudo: yes
+      service: name=nginx state=reloaded

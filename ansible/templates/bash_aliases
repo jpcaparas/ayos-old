@@ -1,0 +1,24 @@
+# Grep color
+alias grep='grep --color=always'
+
+# Make some possibly destructive commands more interactive
+alias rm='rm -i'
+alias mv='mv -i'
+
+# Add some easy shortcuts for formatted directory listings and add a touch of color
+alias ls='ls -F --color=auto'
+alias ll='ls -SplAsh --color=auto'
+alias la='ls -hla --color=auto'
+alias lla='ls -lah --color=auto'
+
+# Quick directory browsing
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd .. ; cd ..'
+alias ....='cd .. ; cd .. ; cd ..'
+
+# Git shortcuts
+alias gs='git st'
+alias gcl='git cl'
+alias gco='git co'
+alias gpl='git lo'

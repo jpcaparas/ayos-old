@@ -1,0 +1,41 @@
+---
+- name: install mysql
+  apt: pkg=mysql-server state=latest
+
+- name: install libmysqlclient-dev
+  apt: pkg=libmysqlclient-dev state=latest
+
+- name: install python-dev
+  apt: pkg=python-dev state=latest
+
+- name: mysql python module
+  pip: name=MySQL-python
+
+- name: global my.cnf
+  template: backup=no
+            dest=/etc/mysql/my.cnf
+            src=my.cnf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart mysql
+
+- name: set root password
+  mysql_user: name=root host=localhost password={{ root_db_password }}
+
+- name: copy my.cnf with root credentials
+  template:
+    src=user.my.cnf
+    dest=/root/.my.cnf
+    owner=root
+    mode=0600
+
+- name: creating user
+  mysql_user: login_user=root login_password={{ root_db_password }} name={{ db_user }} password={{ db_pass }} priv={{ db_user }}.*:ALL state=present
+
+- name: creating {{ db_name }} DB
+  mysql_db: name={{ db_name }} state=present
+
+- name: Modify configuration file to listen on all interfaces
+    lineinfile: dest=/etc/mysql/my.cnf regexp="^bind-address" line="bind-address=0.0.0.0"

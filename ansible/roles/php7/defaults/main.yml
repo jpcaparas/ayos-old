@@ -1,0 +1,28 @@
+---
+php_memory_limit: 1G
+php_error_reporting: Off
+php_display_errors: Off
+php_startup_errors: Off
+
+## php7.0-fpm specific php.ini config vars
+phpfpm_expose_php: Off
+phpfpm_memory_limit: 1G
+phpfpm_max_execution_time: 30
+phpfpm_error_reporting: E_ALL
+phpfpm_display_errors: Off
+phpfpm_startup_errors: Off
+phpfpm_post_max_size: 100M
+phpfpm_upload_max_filesize: 100M
+
+## php7.0-fpm config file (php-fpm.conf)
+phpfpm_conf_log_level: notice
+
+## php7.0-fpm www pool config file (www.conf)
+phpfpm_www_listen: /var/run/php/php7.0-fpm.sock
+phpfpm_www_pm: dynamic
+phpfpm_www_pm_max_children: 5
+phpfpm_www_pm_start_servers: 2
+phpfpm_www_pm_min_spare_servers: 1
+phpfpm_www_pm_max_spare_servers: 3
+phpfpm_www_pm_process_idle_timeout: 10s
+phpfpm_www_pm_max_requests: 500

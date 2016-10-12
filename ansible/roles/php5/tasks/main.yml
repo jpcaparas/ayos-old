@@ -1,0 +1,88 @@
+---
+- name: install php5-cli
+  apt: pkg=php5-cli state=latest
+
+# You may need to symlink 'ln -s /etc/php/7.0/mods-available /etc/php/mods-available'
+# for some modules to install properly
+- name: install php5 libraries
+  apt: pkg={{item}} state=latest
+  with_items:
+    - php5-mcrypt
+    - php5-curl
+    - php5-mysqlnd
+    - php5-readline
+    - php5-json
+
+    - php5-gd
+    - php5-redis
+    # - php5-xdebug
+    # - php5-memcache
+    # - php5-memcached
+
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
+
+- file: path=~/.composer state=directory mode=0755
+
+- name: add github auth token
+  template:
+    src: composer-auth.json
+    dest: "~/.composer/auth.json"
+    backup: no
+
+- name: install php5-cli config file
+  template: backup=no
+            dest=/etc/php5/cli/php.ini
+            src=php-cli.ini
+            owner=root
+            group=root
+            mode=0644
+
+- name: install php5-fpm
+  apt: pkg=php5-fpm state=latest
+
+- name: copy php5-fpm php.ini
+  template: backup=no
+            dest=/etc/php5/fpm/php.ini
+            src=php-fpm.ini
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php5-fpm
+
+- name: copy php5-fpm config
+  template: backup=no
+            dest=/etc/php5/fpm/php-fpm.conf
+            src=php-fpm.conf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php5-fpm
+
+- name: copy php-fpm www.conf
+  template: backup=no
+            dest=/etc/php5/fpm/pool.d/www.conf
+            src=php-fpm-www.conf
+            owner=root
+            group=root
+            mode=0644
+  notify:
+    - restart php5-fpm
+
+- stat: path=/etc/nginx
+  register: nginx_path
+
+- name: copy php-fastcgi.conf to /etc/nginx
+  template: backup=no
+      dest=/etc/nginx/php-fastcgi.conf
+            src=php-fastcgi.conf.j2
+            owner=root
+            group=root
+            mode=0644
+  when: nginx_path.stat.exists
+  notify:
+    - restart nginx

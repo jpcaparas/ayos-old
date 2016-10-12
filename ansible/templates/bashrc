@@ -1,0 +1,5 @@
+# add global composer bin folder to the PATH
+export PATH=$PATH:~/.composer/vendor/bin
+
+# change current directory to web folder
+cd /var/www

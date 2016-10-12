@@ -1,0 +1,11 @@
+---
+  - name: add dotdeb repo
+    apt_repository: repo="{{ item }}"
+    with_items:
+      - deb http://packages.dotdeb.org {{ ansible_distribution_release }} all
+      - deb-src http://packages.dotdeb.org {{ ansible_distribution_release }} all
+    tags: dotdeb
+
+  - name: install dotdeb key
+    apt_key: url=http://www.dotdeb.org/dotdeb.gpg
+    tags: dotdeb

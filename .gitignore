@@ -1,3 +1,4 @@
+### Laravel app ###
 /node_modules
 /public/storage
 /vendor
@@ -5,3 +6,23 @@
 Homestead.json
 Homestead.yaml
 .env
+
+### Vagrant ###
+.vagrant
+ansible/vagrant.retry
+
+### PhpStorm ###
+.idea
+
+### SublimeText ###
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+### Vim ####
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+Session.vim
+# temporary
+.netrwhist
+*~

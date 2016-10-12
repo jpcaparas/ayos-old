@@ -1,0 +1,18 @@
+---
+- name: copy server keys
+  copy:
+    src={{ item.key_src }}
+    dest={{ item.key_dest }}
+    mode=0640
+  with_items: ssl_certificates
+
+- name: decrypt server keys
+  command: openssl rsa -in {{ item.key_dest }} -out {{ item.key_unprotected }} -passin pass:{{ item.key_password }} creates={{ item.key_unprotected }}
+  with_items: ssl_certificates
+
+- name: copy SSL certs
+  copy:
+    src={{ item.cert_src }}
+    dest={{ item.cert_dest }}
+    mode=0640
+  with_items: ssl_certificates
