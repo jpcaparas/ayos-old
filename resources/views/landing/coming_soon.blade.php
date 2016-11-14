@@ -6,6 +6,13 @@
 -->
 <html>
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ env('GOOGLE_TAG_MANAGER_CONTAINER_ID') }}');</script>
+    <!-- End Google Tag Manager -->
     <title>ayos.co.nz is coming soon</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -16,14 +23,6 @@
     <link rel="stylesheet" href="{{ asset('landing-pages/html5up-aerial/assets/css/ie8.css') }}"/><![endif]-->
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="{{ asset('landing-pages/html5up-aerial/assets/css/ie9.css') }}"/><![endif]-->
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{ env('GOOGLE_TAG_MANAGER_CONTAINER_ID') }}');</script>
-    <!-- End Google Tag Manager -->
 </head>
 <body class="loading">
 <div id="wrapper">
