@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="{{ asset('landing-pages/html5up-aerial/assets/css/ie9.css') }}"/><![endif]-->
 </head>
 <body class="loading">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ env('GOOGLE_TAG_MANAGER_CONTAINER_ID') }}"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div id="wrapper">
     <div id="bg"></div>
     <div id="overlay"></div>
@@ -80,9 +84,5 @@
         document.body.scrollTop = 0;
     }
 </script>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ env('GOOGLE_TAG_MANAGER_CONTAINER_ID') }}"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 </body>
 </html>
