@@ -166,7 +166,6 @@ return [
         /*
          * Package Service Providers...
          */
-        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         /*
@@ -178,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Debugging Providers...
+         */
+        Laravel\Tinker\TinkerServiceProvider::class,
     ],
 
     /*
@@ -204,7 +207,6 @@ return [
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
-        'EntityManager' => \LaravelDoctrine\ORM\Facades\Doctrine::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
