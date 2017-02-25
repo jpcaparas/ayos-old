@@ -4,6 +4,9 @@
 
 A online portal that aims to unify Filipinos living in New Zealand, particularly those in Auckland region.
 
+## Getting started
+After cloning the repository, read the [installation guide](readme.md).
+
 ## Features
 
 - [ ] Guides

@@ -178,6 +178,12 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
+         * API stuff
+         */
+        Flugg\Responder\ResponderServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+
+        /*
          * Debugging Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
