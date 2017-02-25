@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "jpcaparas/ayos",
+    "description": "The ayos.co.nz website. Powered by Laravel.",
+    "keywords": ["ayos", "jobs", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
