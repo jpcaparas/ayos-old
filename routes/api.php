@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 
 Route::group([
     // Disables auth middleware to expose public, readonly endpoints (e.g. auth)
-    // 'middleware' => 'auth.basic'
+    'middleware' => 'cors'
     // todo add oauth2 middleware for POST/PUT/DELETE endpoints
 ], function() {
     Route::resource('/posts', 'Api\PostController', [
