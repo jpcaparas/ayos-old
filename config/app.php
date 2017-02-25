@@ -184,6 +184,11 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
 
         /*
+         * CMS stuff
+         */
+        TCG\Voyager\VoyagerServiceProvider::class,
+
+        /*
          * Debugging Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
