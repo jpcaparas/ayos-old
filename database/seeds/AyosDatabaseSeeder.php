@@ -13,6 +13,6 @@ class AyosDatabaseSeeder extends Seeder
     {
         // Establishments
         $this->call(EstablishmentTypesTableSeeder::class);
-        $this->call(DemoEstablishmentsTableSeeder::class);
+        $this->call(EstablishmentsDataTypeRowTableSeeder::class);
     }
 }

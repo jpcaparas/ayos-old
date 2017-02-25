@@ -11,6 +11,9 @@ class Establishment extends Model
 
     protected $table = 'establishments';
 
+    // TODO slug
+    // TODO meta tags
+    // TODO status
     protected $fillable = [
         'name',
         'address',
