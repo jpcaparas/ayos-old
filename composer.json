@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "jpcaparas/ayos",
+    "description": "The ayos.co.nz website. Powered by Laravel.",
+    "keywords": ["ayos", "jobs", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -12,7 +12,10 @@
         "laravel/tinker": "^1.0",
         "flugger/laravel-responder": "^1.2",
         "guzzlehttp/guzzle": "^6.2",
-        "laravel/passport": "^2.0"
+        "laravel/passport": "^2.0",
+        "league/flysystem": "^1.0.35",
+        "tcg/voyager": "^0.11.2",
+        "barryvdh/laravel-cors": "^0.8.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

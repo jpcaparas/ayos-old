@@ -180,8 +180,14 @@ return [
         /*
          * API stuff
          */
-        Flugg\Responder\ResponderServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Flugg\Responder\ResponderServiceProvider::class,
+
+        /*
+         * CMS stuff
+         */
+        TCG\Voyager\VoyagerServiceProvider::class,
 
         /*
          * Debugging Providers...
