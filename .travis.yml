@@ -1,0 +1,32 @@
+language: php
+
+php:
+    - '7.0'
+    - '7.1'
+    - 'nightly'
+
+## Cache it only for the current build
+## Build jobs will share the cache
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+    - nvm install node
+
+install:
+    - composer install --no-interaction
+    - npm set progress=false && npm install
+    - cp .env.example .env
+    - php artisan key:generate
+
+script:
+    - vendor/bin/phpunit
+
+## TODO: Slack notifications
+notifications:
+    email:
+        recipients:
+            - jp@jpcaparas.com
+        on_success: always
+        on_failure: always
