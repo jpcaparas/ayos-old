@@ -27,4 +27,9 @@ Route::group([
             'create', 'store', 'edit', 'update', 'destroy' // Disable POST verbs, READONLY
         ]
     ]);
+    Route::resource('/establishments', 'Api\EstablishmentController', [
+        'except' => [
+            'create', 'store', 'edit', 'update', 'destroy' // Disable POST verbs, READONLY
+        ]
+    ]);
 });
