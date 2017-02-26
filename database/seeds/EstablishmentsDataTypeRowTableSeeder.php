@@ -163,6 +163,21 @@ class EstablishmentsDataTypeRowTableSeeder extends Seeder
                            ])->save();
         }
 
+        $dataRow = $this->dataRow($establishmentsDataType, 'city');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                               'type'         => 'text',
+                               'display_name' => 'City',
+                               'required'     => 0,
+                               'browse'       => 0,
+                               'read'         => 1,
+                               'edit'         => 1,
+                               'add'          => 1,
+                               'delete'       => 1,
+                               'details'      => '',
+                           ])->save();
+        }
+
         $dataRow = $this->dataRow($establishmentsDataType, 'phone');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -265,6 +280,63 @@ class EstablishmentsDataTypeRowTableSeeder extends Seeder
                                'add'          => 1,
                                'delete'       => 1,
                                'details'      => '',
+                           ])->save();
+        }
+
+        $dataRow = $this->dataRow($establishmentsDataType, 'postcode');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                               'type'         => 'text',
+                               'display_name' => 'Post code',
+                               'required'     => 0,
+                               'browse'       => 0,
+                               'read'         => 1,
+                               'edit'         => 1,
+                               'add'          => 1,
+                               'delete'       => 1,
+                               'details'      => '',
+                           ])->save();
+        }
+
+        $dataRow = $this->dataRow($establishmentsDataType, 'is_active');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                               'type'         => 'select_dropdown',
+                               'display_name' => 'Status',
+                               'required'     => 1,
+                               'browse'       => 1,
+                               'read'         => 1,
+                               'edit'         => 1,
+                               'add'          => 1,
+                               'delete'       => 1,
+                               'details'      => '
+{
+    "default": "0",
+    "options": {
+        "0": "Inactive",
+        "1": "Active"
+    }
+}',
+                           ])->save();
+        }
+
+
+
+        $dataRow = $this->dataRow($establishmentsDataType, 'founded_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                               'type'         => 'date',
+                               'display_name' => 'Founded',
+                               'required'     => 0,
+                               'browse'       => 0,
+                               'read'         => 1,
+                               'edit'         => 1,
+                               'add'          => 1,
+                               'delete'       => 1,
+                               'details'      => '
+{
+    "format" : "Y"
+}',
                            ])->save();
         }
 

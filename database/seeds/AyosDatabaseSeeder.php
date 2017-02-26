@@ -11,8 +11,11 @@ class AyosDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Establishments
+        // Required data
         $this->call(EstablishmentTypesTableSeeder::class);
         $this->call(EstablishmentsDataTypeRowTableSeeder::class);
+
+        // Demo data (remove in production)
+        $this->call(Demo\EstablishmentsTableSeeder::class);
     }
 }

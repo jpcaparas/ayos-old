@@ -23,8 +23,12 @@ class CreateEstablishmentsTable extends Migration
             $table->text('description')->nullable();
             $table->string('latitude');
             $table->string('longitude');
+            $table->string('city');
             $table->string('suburb');
             $table->string('region');
+            $table->string('postcode');
+            $table->boolean('is_active');
+            $table->dateTime('founded_at');
             $table->integer('establishment_type_id');
             $table->timestamps();
             $table->softDeletes();
