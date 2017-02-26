@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,7 +12,6 @@ class Establishment extends Model
 
     protected $table = 'establishments';
 
-    // TODO slug
     // TODO meta tags
     // TODO status
     protected $fillable = [
@@ -20,10 +20,15 @@ class Establishment extends Model
         'phone',
         'email',
         'url',
+        'is_active',
+        'description',
         'latitude',
         'longitude',
+        'city',
         'suburb',
         'region',
+        'postcode',
+        'founded_at',
         'establishment_type_id'
     ];
 

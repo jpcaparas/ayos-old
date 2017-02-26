@@ -15,7 +15,8 @@
         "laravel/passport": "^2.0",
         "league/flysystem": "^1.0.35",
         "tcg/voyager": "^0.11.2",
-        "barryvdh/laravel-cors": "^0.8.6"
+        "barryvdh/laravel-cors": "^0.8.6",
+        "cviebrock/eloquent-sluggable": "^4.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
