@@ -33,7 +33,8 @@ class Establishment extends Model
         'establishment_type_id'
     ];
 
-    public function establishmentTypeId() {
+    public function establishmentTypeId()
+    {
         return $this->belongsTo(EstablishmentType::class);
     }
 
