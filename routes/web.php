@@ -16,3 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/coming_soon', 'LandingController@comingSoon')->name('landing.coming_soon');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
