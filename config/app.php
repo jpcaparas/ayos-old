@@ -193,6 +193,11 @@ return [
          * Debugging Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+
+        /*
+         * Full-text search
+         */
+        \Laravel\Scout\ScoutServiceProvider::class
     ],
 
     /*

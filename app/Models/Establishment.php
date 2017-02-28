@@ -5,10 +5,11 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Establishment extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Searchable;
 
     protected $table = 'establishments';
 
@@ -32,7 +33,13 @@ class Establishment extends Model
         'establishment_type_id'
     ];
 
-    public function establishmentTypeId() {
+    public function establishmentTypeId()
+    {
         return $this->belongsTo(EstablishmentType::class);
+    }
+
+    public function searchableAs()
+    {
+        return 'establishments_index';
     }
 }
