@@ -5,7 +5,7 @@
 A online portal that provides tools to make life more convenient for Filipinos living in New Zealand, particularly those in Auckland region.
 
 ## Getting started
-After cloning the repository, read the [installation guide](readme.md).
+After cloning the repository, read the [installation guide](docs/installation.md).
 
 ## Features
 
