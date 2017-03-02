@@ -1,27 +1,26 @@
-# ayos.co.nz
+# AYOS.CO.NZ
 
 ## Overview
 
-A online portal that aims to unify Filipinos living in New Zealand, particularly those in Auckland region.
+A online portal that provides tools to make life more convenient for Filipinos living in New Zealand, particularly those in Auckland region.
 
 ## Getting started
 After cloning the repository, read the [installation guide](readme.md).
 
 ## Features
 
-- [ ] Guides
-- [ ] Flat search
-- [ ] Establishment search
-- [ ] Job postings and alerts
-- [ ] Guides
-- [ ] Event organizer
-- [ ] Announcement boards
-- [ ] Public API
-- [ ] Mobile app
+- [:o:] Guides
+- [:o:] Flat search
+- [:hourglass_flowing_sand:] Establishment search
+- [:o:] Job postings and alerts
+- [:o:] Event organizer
+- [:o:] Announcement boards
+- [:o:] Public API
+- [:o:] Mobile app
 
 ## Key technologies
-- Laravel
-- vue.js
-- React
-- Elasticsearch
-- Ansible
+- [:white_check_mark:] Laravel
+- [:o:] vue.js
+- [:hourglass_flowing_sand:] React
+- [:o:] Elasticsearch
+- [:o:] Ansible
