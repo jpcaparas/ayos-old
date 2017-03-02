@@ -18,7 +18,8 @@
         "barryvdh/laravel-cors": "^0.8.6",
         "cviebrock/eloquent-sluggable": "^4.2",
         "laravel/scout": "^3.0",
-        "algolia/algoliasearch-client-php": "^1.15"
+        "algolia/algoliasearch-client-php": "^1.15",
+        "codeception/codeception": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
