@@ -12,7 +12,7 @@ _ide_helper.php
 .vagrant
 ansible/vagrant.retry
 
-### PhpStorm ###
+### PhpStorm ##
 .idea
 
 ### SublimeText ###
@@ -30,3 +30,8 @@ Session.vim
 
 ### Passport ###
 /storage/oauth-*
+tests/_output/*
+
+### Codeception ###
+tests/_data/*
+tests/_log/*
